@@ -18,7 +18,12 @@ class _PageState extends State<SharedPrefsPage> {
     super.initState();
     _controller = TextEditingController();
     controller = Get.find();
-    // TODO: Usa el futuro <<usingDarkTheme>> del controlador para establecer el modo guardado de tema.
+    // TO DO: Usa el futuro <<usingDarkTheme>> del controlador para establecer el modo guardado de tema.
+    controller.usingDarkTheme.then((value) {
+      controller.themeMode = value ?? false;
+      controller.changeThemeMode();
+    });
+
     // TODO-HINT: En caso de que no haya una preferencia guardada (value == null), el valor por defecto es false.
   }
 
@@ -29,7 +34,8 @@ class _PageState extends State<SharedPrefsPage> {
         title: const Text("Shared Preferences"),
       ),
       body: FutureBuilder<String?>(
-          future: // TODO: Futuro => <<storedName>> del controlador,
+          // TO DO: Futuro => <<storedName>> del controlador
+          future: controller.storedName,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               final name = snapshot.data;
@@ -53,8 +59,12 @@ class _PageState extends State<SharedPrefsPage> {
                         ),
                         ElevatedButton(
                           onPressed: () async {
-                            // TODO: 1. Guarda el nombre usando el controlador
-                            // TODO: 2. Actualiza el estado limpiando _controller.
+                            // TO DO: 1. Guarda el nombre usando el controlador
+                            await controller.saveName(_controller.text);
+                            // TO DO: 2. Actualiza el estado limpiando _controller.
+                            setState(() {
+                              _controller.clear();
+                            });
                           },
                           child: const Text(
                             "Actualizar",
@@ -65,6 +75,7 @@ class _PageState extends State<SharedPrefsPage> {
                   ),
                   Text(
                     // Si name es diferente de nulo muestra "Hola! ________.", si no muestra "No hay nombre guardado."
+                    name != null ? "Hola! $name." : "No hay nombre guardado.",
                     style: const TextStyle(
                       fontSize: 15.0,
                       fontWeight: FontWeight.w500,
@@ -74,9 +85,12 @@ class _PageState extends State<SharedPrefsPage> {
                     child: Center(
                       child: ElevatedButton(
                         onPressed: () {
-                          // TODO: 1. Invierte el valor de controller.themeMode
-                          // TODO: 2. Cambia el modo usando changeThemeMode() del controlador
-                          // TODO: 3. Guarda el cambio usando saveThemeMode()
+                          // TO DO: 1. Invierte el valor de controller.themeMode
+                          controller.themeMode = !controller.themeMode;
+                          // TO DO: 2. Cambia el modo usando changeThemeMode() del controlador
+                          controller.changeThemeMode();
+                          // TO DO: 3. Guarda el cambio usando saveThemeMode()
+                          controller.saveThemeMode();
                         },
                         child: const Text("Cambiar Tema"),
                       ),

@@ -6,19 +6,24 @@ class SharedPrefsRepo {
     dynamic value;
     switch (T) {
       case bool:
-        value = // TODO: Obten un valor booleano usando el key.
+        value = prefs.getBool(key);
+        // TO DO: Obten un valor booleano usando el key.
         break;
       case double:
-        value = // TODO: Obten un valor decimal usando el key.
+        value = prefs.getDouble(key);
+        // TO DO: Obten un valor decimal usando el key.
         break;
       case int:
-        value = // TODO: Obten un valor entero usando el key.
+        value = prefs.getInt(key);
+        // TO DO: Obten un valor entero usando el key.
         break;
       case String:
-        value = // TODO: Obten un string usando el key.
+        value = prefs.getString(key);
+        // TO DO: Obten un string usando el key.
         break;
       case List:
-        value = // TODO: Obten una lista de strings usando el key.
+        value = prefs.getStringList(key);
+        // TO DO: Obten una lista de strings usando el key.
         break;
     }
     return value as T?;
@@ -28,19 +33,24 @@ class SharedPrefsRepo {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     switch (T) {
       case bool:
-        // TODO: Guarda value como booleano usando el key.
+        // TO DO: Guarda value como booleano usando el key.
+        prefs.setBool(key, value as bool);
         break;
       case double:
-        // TODO: Guarda value como decimal usando el key.
+        // TO DO: Guarda value como decimal usando el key.
+        prefs.setDouble(key, value as double);
         break;
       case int:
-        // TODO: Guarda value como entero usando el key.
+        // TO DO: Guarda value como entero usando el key.
+        prefs.setInt(key, value as int);
         break;
       case String:
-        // TODO: Guarda value como string usando el key.
+        // TO DO: Guarda value como string usando el key.
+        prefs.setString(key, value as String);
         break;
       case List:
-        // TODO: Guarda value como una lista de strings usando el key.
+        // TO DO: Guarda value como una lista de strings usando el key.
+        prefs.setStringList(key, value as List<String>);
         break;
     }
   }

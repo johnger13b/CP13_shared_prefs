@@ -12,7 +12,9 @@ class SharedPrefsApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      darkTheme: ThemeData.dark(),
       // Agrega el darkTheme por defecto.
+      themeMode: ThemeMode.system,
       // Establece themeMode en modo sistema.
       home: const SharedPrefsPage(),
     );
